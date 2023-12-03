@@ -109,6 +109,7 @@
             return (number < 10 ? '0' : '') + number;
         }
         var count=0;
+        var autoScroll=1;
         setInterval(function () {
             var vocabPron=$('.VocabPronounce_vcoabPronounce__2D0UH');
             if (vocabPron.length > 0) {
@@ -119,6 +120,7 @@
                     minutes=0;
                     vocabPron.append(newElement)
                     vocabPron.append(audioElement);
+                    autoScroll=1
                 }
                 if(count++%5===0)
                 {
@@ -134,7 +136,11 @@
             }
             else
             {
-                window.scrollTo(0, 100);
+                if(autoScroll===1)
+                {
+                    window.scrollTo(0, 100);
+                    autoScroll=0;
+                }
             }
             var button=$("h6:contains('真题例句')");
             if (button.length > 0) {
