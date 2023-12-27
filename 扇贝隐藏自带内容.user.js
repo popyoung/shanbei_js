@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         扇贝隐藏自带内容
 // @namespace    http://tampermonkey.net/
-// @version      0.4
+// @version      0.41
 // @description  try to take over the world!
 // @author       You
 // @match        https://web.shanbay.com/wordsweb/
@@ -29,7 +29,6 @@
         style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k {font-size:18px;}'
         style.innerHTML += '.index_container__LuiIf .index_left__2LkyW {font-size:18px;}'
         style.innerHTML += '.index_trash__2coNz {display:none;}'
-        style.innerHTML += '.StudyPage_studyPage__1Ri5C .StudyPage_nextBtn__1ygGn {right: 16px;}'
         style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k .index_left__3SFmQ>p {margin-bottom:15px;display: flex;}'
         style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k .index_left__3SFmQ>p::before {content: "\\021D2\\020";color: #1171b2;padding-right: 8px;margin-left:-30px;}'
         style.innerHTML += '.block-center {margin-left: inherit;}'
@@ -44,6 +43,40 @@
         style.innerHTML += '.index_createNote__1IzQf  {width:unset;}'
         //style.innerHTML += 'body {line-height: 2.2;}'
         document.head.appendChild(style);
+
+        var style2 = document.createElement('style');
+        style2.textContent = '.StudyPage_studyPage__1Ri5C .StudyPage_nextBtn__1ygGn {right: 16px;}'
+        document.head.appendChild(style2);
+
+        var btnOnRight=1
+        // 创建按钮元素并添加样式和事件
+        var button = $('<button>', {
+            text: '切换按钮位置',
+            class: 'button',
+            click: function() {
+                if(btnOnRight==1)
+                {
+                    btnOnRight=0;
+                    style2.textContent='.StudyPage_studyPage__1Ri5C .StudyPage_nextBtn__1ygGn {left: -1px;width: 96px;height: 96px;background-size: 72px 72px;opacity:75%}'
+                }
+                else
+                {
+                    btnOnRight=1;
+                    style2.textContent = '.StudyPage_studyPage__1Ri5C .StudyPage_nextBtn__1ygGn {right: 16px;}'
+                }
+            },
+            css: {
+                'background': '#28bea0',
+                'cursor': 'pointer',
+                'border-radius': '6px',
+                'padding': '4px 12px',
+                'color': '#fff',
+                'font-size': '16px'
+            }
+        });
+
+        // 将按钮添加到元素容器中
+        $('.SubNav_itemsWrapper__1mM4u').append(button);
 
         function simulateKeyPress(key) {
             // 创建一个 KeyboardEvent 对象
@@ -118,19 +151,9 @@
                     var newElement = $('<div id="timer">00:00</div>');
                     seconds=0;
                     minutes=0;
-                    vocabPron.append(newElement)
+                    vocabPron.append(newElement);
                     vocabPron.append(audioElement);
-                    autoScroll=1
-
-                    var copiedElement = $('.StudyPage_nextBtn__1ygGn').clone();
-                    copiedElement.css({
-                        'left': '-1px',
-                        'width': '96px',
-                        'height': '96px',
-                        'opacity': '75%',
-                        'background-size': '72px 72px'
-                    });
-                    copiedElement.insertBefore($('.StudyPage_nextBtn__1ygGn'));
+                    autoScroll=1;
                 }
                 if(count++%5===0)
                 {
@@ -160,7 +183,6 @@
                         $('.index_wrap__2PaUx').toggle();
                     });
                     //使用jQuery的bind方法，给document绑定keypress事件
-
 
                     button.css({
                         background: "#28bea0",
