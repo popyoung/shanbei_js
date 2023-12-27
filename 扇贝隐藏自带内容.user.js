@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         扇贝隐藏自带内容
 // @namespace    http://tampermonkey.net/
-// @version      0.31
+// @version      0.4
 // @description  try to take over the world!
 // @author       You
 // @match        https://web.shanbay.com/wordsweb/
@@ -121,6 +121,16 @@
                     vocabPron.append(newElement)
                     vocabPron.append(audioElement);
                     autoScroll=1
+
+                    var copiedElement = $('.StudyPage_nextBtn__1ygGn').clone();
+                    copiedElement.css({
+                        'left': '-1px',
+                        'width': '96px',
+                        'height': '96px',
+                        'opacity': '75%',
+                        'background-size': '72px 72px'
+                    });
+                    copiedElement.insertBefore($('.StudyPage_nextBtn__1ygGn'));
                 }
                 if(count++%5===0)
                 {
@@ -189,20 +199,52 @@
         }, 200);
     }
 
+    function lookup()
+    {
+        $('.BayTrans_paraphrase__2JMIz').css('background-color', 'black');
+        $('.index_left__2LkyW > p:nth-child(2)').css('background-color', 'black');
+        $('div.index_exemplarySentenceDetail__2Cq1p:nth-child(1) > div:nth-child(1) > div:nth-child(1)').css('background-color', 'black');
+        $('div.index_name__1gkfJ').css('background-color', 'black');
+        $('div.index_sentenceCn__XJD1u').css('background-color', 'black');
+        var newTab=window.open('gdlookup://localhost/'+$('div.VocabPronounce_word__17Tma').text(), "_blank");
+        newTab.close();
+    }
+
     $(document).keydown(function(event) {
         // 检查按下的键是否是空格键（空格键的键码是 32）
         if (event.which === 32) {
             event.preventDefault();
-            // 执行特定操作，例如显示警告框
-            $('.BayTrans_paraphrase__2JMIz').css('background-color', 'black');
-            $('.index_left__2LkyW > p:nth-child(2)').css('background-color', 'black');
-            $('div.index_exemplarySentenceDetail__2Cq1p:nth-child(1) > div:nth-child(1) > div:nth-child(1)').css('background-color', 'black');
-            $('div.index_name__1gkfJ').css('background-color', 'black');
-            $('div.index_sentenceCn__XJD1u').css('background-color', 'black');
-            var newTab=window.open('gdlookup://localhost/'+$('div.VocabPronounce_word__17Tma').text(), "_blank");
-            newTab.close();
-
+            lookup();
         }
     });
-    // Your code here...
+
+    var timer;
+    $(document).on('touchstart', function() {
+        // 开始计时器，模拟长按事件
+        timer = setTimeout(function() {
+            lookup();
+        }, 1000); // 1000毫秒（1秒）为长按时间
+    });
+
+    $(document).on('touchend', function() {
+        // 清除计时器
+        clearTimeout(timer);
+    });
+
+    $(document).on('mousedown', function() {
+        // 开始计时器，模拟长按事件
+        timer = setTimeout(function() {
+            lookup();
+        }, 1000); // 1000毫秒（1秒）为长按时间
+    });
+
+    $(document).on('mouseup', function() {
+        // 清除计时器
+        clearTimeout(timer);
+    });
+
+    // 鼠标离开元素时也要清除计时器，以防止长按事件在离开元素时触发
+    $(document).on('mouseleave', function() {
+        clearTimeout(timer);
+    });
 })();
