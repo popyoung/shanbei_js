@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         扇贝隐藏自带内容
 // @namespace    http://tampermonkey.net/
-// @version      0.44
+// @version      0.45
 // @description  try to take over the world!
 // @author       You
 // @match        https://web.shanbay.com/wordsweb/
@@ -45,7 +45,7 @@
         document.head.appendChild(style);
 
         var style2 = document.createElement('style');
-        style2.textContent = '.StudyPage_studyPage__1Ri5C .StudyPage_nextBtn__1ygGn {right: 16px;}';
+        style2.textContent = '.StudyPage_studyPage__1Ri5C .StudyPage_nextBtn__1ygGn {right: 16px;} .block-center {margin-right: auto; margin-left: inherit;}';
         document.head.appendChild(style2);
         if (window.screen.height < 600) {
             var style3 = document.createElement('style');
@@ -61,11 +61,11 @@
             click: function () {
                 if (btnOnRight == 1) {
                     btnOnRight = 0;
-                    style2.textContent = '.StudyPage_studyPage__1Ri5C .StudyPage_nextBtn__1ygGn {left: -1px;width: 96px;height: 96px;background-size: 72px 72px;opacity:75%}'
+                    style2.textContent = '.StudyPage_studyPage__1Ri5C .StudyPage_nextBtn__1ygGn {left: 12px;} .block-center {margin-right: inherit; margin-left: auto;}'
                 }
                 else {
                     btnOnRight = 1;
-                    style2.textContent = '.StudyPage_studyPage__1Ri5C .StudyPage_nextBtn__1ygGn {right: 16px;}'
+                    style2.textContent = '.StudyPage_studyPage__1Ri5C .StudyPage_nextBtn__1ygGn {right: 16px;} .block-center {margin-right: auto; margin-left: inherit;}';
                 }
             },
             css: {
