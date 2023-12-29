@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         扇贝隐藏自带内容
 // @namespace    http://tampermonkey.net/
-// @version      0.47
+// @version      0.48
 // @description  try to take over the world!
 // @author       You
 // @match        https://web.shanbay.com/wordsweb/
@@ -214,14 +214,7 @@
                 if (lines[i] != "")
                 {
                     reminderText += '<p>' + lines[i] + '</p>';
-                    if (lines[i].includes('= ') || lines[i].includes('≈ '))
-                    {
-                        newTextContent += '<p>' + lines[i].replace(/[A-z]+/g, '?'); + '</p>';
-                    }
-                    else
-                    {
-                        newTextContent+= '<p>' + lines[i] + '</p>';
-                    }
+                    newTextContent += '<p>' + lines[i].replace(/(?<=[=≈] .*)[A-z]+/g, '?'); + '</p>';
                 }
             }
 
