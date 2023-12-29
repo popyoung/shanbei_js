@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         扇贝隐藏自带内容
 // @namespace    http://tampermonkey.net/
-// @version      0.46
+// @version      0.47
 // @description  try to take over the world!
 // @author       You
 // @match        https://web.shanbay.com/wordsweb/
@@ -11,6 +11,7 @@
 
 (function () {
     'use strict';
+    var reminderText;
     // 检查是否已经存在具有相同规则的<style元素
     var existingStyle = document.querySelector('style[data-rule="hideTips"]');
     if (!existingStyle) {
@@ -135,11 +136,10 @@
             var timerDisplay = $('#timer');
             timerDisplay.text(padZero(minutes) + ':' + padZero(seconds));
         }
-
         $(document).bind('keydown', function (event) {
             if (event.keyCode == 69) {
                 $('.index_wrap__2PaUx').toggle();
-                playReminder();
+                //playReminder();
             }
         });
         // 补零函数，确保显示两位数
@@ -205,13 +205,24 @@
             }
             // 使用正则表达式将文本按行拆分
             var lines = textContent.split('\n');
+            reminderText='';
 
             // 用于存储包含 <p> 标签的新文本内容
             var newTextContent = '';
             // 遍历每一行，添加 <p> 标签
             for (var i = 0; i < lines.length; i++) {
                 if (lines[i] != "")
-                    newTextContent += '<p>' + lines[i] + '</p>';
+                {
+                    reminderText += '<p>' + lines[i] + '</p>';
+                    if (lines[i].includes('= ') || lines[i].includes('≈ '))
+                    {
+                        newTextContent += '<p>' + lines[i].replace(/[A-z]+/g, '?'); + '</p>';
+                    }
+                    else
+                    {
+                        newTextContent+= '<p>' + lines[i] + '</p>';
+                    }
+                }
             }
 
             // 将新文本内容设置回 div
@@ -237,6 +248,7 @@
         // 检查按下的键是否是空格键（空格键的键码是 32）
         if (event.which === 32) {
             event.preventDefault();
+            $('.index_left__3SFmQ').html(reminderText);
             lookup();
         }
     });
