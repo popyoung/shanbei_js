@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         扇贝隐藏自带内容
 // @namespace    http://tampermonkey.net/
-// @version      0.45
+// @version      0.46
 // @description  try to take over the world!
 // @author       You
 // @match        https://web.shanbay.com/wordsweb/
@@ -76,7 +76,7 @@
                 'color': '#fff',
                 'font-size': '16px',
                 'position': 'absolute',
-                'right': '20px'
+                'right': '10px'
             }
         });
 
