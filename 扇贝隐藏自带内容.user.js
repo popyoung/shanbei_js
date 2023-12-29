@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         扇贝隐藏自带内容
 // @namespace    http://tampermonkey.net/
-// @version      0.48
+// @version      0.49
 // @description  try to take over the world!
 // @author       You
 // @match        https://web.shanbay.com/wordsweb/
@@ -230,7 +230,7 @@
         $('div.index_exemplarySentenceDetail__2Cq1p:nth-child(1) > div:nth-child(1) > div:nth-child(1)').css('background-color', 'black');
         $('div.index_name__1gkfJ').css('background-color', 'black');
         $('div.index_sentenceCn__XJD1u').css('background-color', 'black');
-
+        $('.index_left__3SFmQ').html(reminderText);
         if (window.screen.height >= 600) {
             var newTab = window.open('gdlookup://localhost/' + $('div.VocabPronounce_word__17Tma').text(), "_blank");
             newTab.close();
@@ -241,7 +241,6 @@
         // 检查按下的键是否是空格键（空格键的键码是 32）
         if (event.which === 32) {
             event.preventDefault();
-            $('.index_left__3SFmQ').html(reminderText);
             lookup();
         }
     });
