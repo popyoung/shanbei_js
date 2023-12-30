@@ -8,6 +8,12 @@
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=shanbay.com
 // @grant        none
 // ==/UserScript==
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
 
 (function () {
     'use strict';
@@ -205,6 +211,8 @@
             }
             // 使用正则表达式将文本按行拆分
             var lines = textContent.split('\n');
+            shuffleArray(lines);
+
             reminderText='';
 
             // 用于存储包含 <p> 标签的新文本内容
