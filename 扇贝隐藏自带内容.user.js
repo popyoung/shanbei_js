@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         扇贝隐藏自带内容
 // @namespace    http://tampermonkey.net/
-// @version      0.50
+// @version      0.51
 // @description  try to take over the world!
 // @author       popyoung
 // @match        https://web.shanbay.com/wordsweb/
@@ -263,7 +263,7 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
         // 开始计时器，模拟长按事件
         timer = setTimeout(function () {
             lookup();
-        }, 1000); // 1000毫秒（1秒）为长按时间
+        }, 2000); // 1000毫秒（1秒）为长按时间
     });
 
     $(document).on('touchend', function () {
