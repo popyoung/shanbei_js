@@ -227,7 +227,7 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
             for (let i = 0; i < lines.length; i++) {
                 if (lines[i] != "") {
                     reminderText += '<p>' + lines[i] + '</p>';
-                    newTextContent += '<p>' + lines[i].replace(/(?<=[=≈] .*)[A-z]+/g, '?'); + '</p>';
+                    newTextContent += '<p>' + lines[i].replace(/(?<=[=≈].*?)[A-z -]+/g, ' ?'); + '</p>';
                 }
             }
 
