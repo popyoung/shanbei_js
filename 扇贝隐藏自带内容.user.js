@@ -1,16 +1,16 @@
 // ==UserScript==
 // @name         扇贝隐藏自带内容
 // @namespace    http://tampermonkey.net/
-// @version      0.49
+// @version      0.50
 // @description  try to take over the world!
-// @author       You
+// @author       popyoung
 // @match        https://web.shanbay.com/wordsweb/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=shanbay.com
 // @grant        none
 // ==/UserScript==
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
+function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
+    for (let i = array.length - 1; i > startIndexToSkip; i--) {
+        const j = Math.floor(Math.random() * (i - startIndexToSkip + 1)) + startIndexToSkip;
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
@@ -211,16 +211,21 @@ function shuffleArray(array) {
             }
             // 使用正则表达式将文本按行拆分
             var lines = textContent.split('\n');
-            shuffleArray(lines);
+            var index = 0;
+            for (let i = 0; i < lines.length; i++) {
+                index = i;
+                if (/^[A-z]/.test(lines[i]))
+                    break;
+            }
+            shuffleArrayStartingFromIndex(lines, index);
 
-            reminderText='';
+            reminderText = '';
 
             // 用于存储包含 <p> 标签的新文本内容
             var newTextContent = '';
             // 遍历每一行，添加 <p> 标签
-            for (var i = 0; i < lines.length; i++) {
-                if (lines[i] != "")
-                {
+            for (let i = 0; i < lines.length; i++) {
+                if (lines[i] != "") {
                     reminderText += '<p>' + lines[i] + '</p>';
                     newTextContent += '<p>' + lines[i].replace(/(?<=[=≈] .*)[A-z]+/g, '?'); + '</p>';
                 }
