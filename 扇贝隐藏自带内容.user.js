@@ -39,8 +39,8 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
         style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k .index_left__3SFmQ>p {margin-bottom:15px;display: flex;}'
         style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k .index_left__3SFmQ>p::before {content: "\\021D2\\020";color: #1171b2;padding-right: 8px;margin-left:-30px;}'
         style.innerHTML += '.block-center {margin-left: inherit;}'
-        style.innerHTML += '.span9 {width: 740px;}'
-        style.innerHTML += '.StudyPage_studyPage__1Ri5C {max-width: 1200px;}'
+        style.innerHTML += '.index_option__1CVr2 {width: -moz-available;}'
+        style.innerHTML += '.StudyPage_studyPage__1Ri5C {max-width: 2400px; padding: 10px;}'
         style.innerHTML += '.index_wrap__2PaUx {display: none;}'
         style.innerHTML += '.Footer_footerWrap__L4iuD {display: none;}'
         style.innerHTML += '.Layout_page__2Wedt {padding-bottom: 50px;}'
@@ -54,12 +54,16 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
         var style2 = document.createElement('style');
         style2.textContent = '.StudyPage_studyPage__1Ri5C .StudyPage_nextBtn__1ygGn {right: 16px;} .block-center {margin-right: auto; margin-left: inherit;}';
         document.head.appendChild(style2);
-        if (window.screen.height < 600) {
-            var style3 = document.createElement('style');
-            style3.textContent = '.StudyPage_studyPage__1Ri5C .StudyPage_nextBtn__1ygGn {top: 30%}';
-            document.head.appendChild(style3);
+        var style3 = document.createElement('style');
+        function refreshWindowFrame() {
+            if (window.screen.height < 600) {
+                style3.textContent = '.StudyPage_studyPage__1Ri5C .StudyPage_nextBtn__1ygGn {top: 30%}';
+            }
+            style3.textContent += '.span9 {width: ' + (window.innerWidth - 220) + 'px;}'
+            style3.textContent += '.span12 {width: ' + (window.innerWidth - 150) + 'px;}'
         }
-
+        refreshWindowFrame();
+        document.head.appendChild(style3);
         var btnOnRight = 1;
         // 创建按钮元素并添加样式和事件
         var button = $('<button>', {
@@ -155,6 +159,7 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
         var count = 0;
         var autoScroll = 1;
         setInterval(function () {
+            refreshWindowFrame();
             var vocabPron = $('.VocabPronounce_vcoabPronounce__2D0UH');
             if (vocabPron.length > 0) {
                 if (vocabPron.children().length === 3) {
