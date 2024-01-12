@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         扇贝隐藏自带内容
 // @namespace    http://tampermonkey.net/
-// @version      0.52
+// @version      0.53
 // @description  try to take over the world!
 // @author       popyoung
 // @match        https://web.shanbay.com/wordsweb/
@@ -61,6 +61,8 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
             }
             style3.textContent += '.span9 {width: ' + (window.innerWidth - 220) + 'px;}'
             style3.textContent += '.span12 {width: ' + (window.innerWidth - 150) + 'px;}'
+            style3.textContent += '.index_progress__1aCBt {width: ' + (window.innerWidth - 90) + 'px;}'
+            style3.textContent += '.StudySummary_studySummary__32y_I table {width: ' + (window.innerWidth - 90) + 'px;}'
         }
         refreshWindowFrame();
         document.head.appendChild(style3);
