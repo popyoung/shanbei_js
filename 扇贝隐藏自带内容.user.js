@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         扇贝隐藏自带内容
 // @namespace    http://tampermonkey.net/
-// @version      0.53
+// @version      0.54
 // @description  try to take over the world!
 // @author       popyoung
 // @match        https://web.shanbay.com/wordsweb/
@@ -48,6 +48,8 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
         style.innerHTML += '.index_status__15KG5 .index_vocabularyLink__1c7FY {right: 80px;}'
         style.innerHTML += 'textarea {height: 270px !important;font-size:18px !important;}'
         style.innerHTML += '.index_createNote__1IzQf  {width:unset;}'
+        style.innerHTML += '.index_progress__1aCBt {max-width:1000px;}'
+        style.innerHTML += '.StudySummary_studySummary__32y_I table {max-width:1000px;}'
         //style.innerHTML += 'body {line-height: 2.2;}'
         document.head.appendChild(style);
 
@@ -234,7 +236,7 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
             for (let i = 0; i < lines.length; i++) {
                 if (lines[i] != "") {
                     reminderText += '<p>' + lines[i] + '</p>';
-                    newTextContent += '<p>' + lines[i].replace(/(?<=[=≈].*?)[A-z -]+/g, ' ?'); + '</p>';
+                    newTextContent += '<p>' + lines[i].replace(/(?<=[=≈].*?)\b(?:(?!or))\b[a-z]+/g, ' ?'); + '</p>';
                 }
             }
 
