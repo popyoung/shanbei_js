@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         扇贝隐藏自带内容
 // @namespace    http://tampermonkey.net/
-// @version      0.51
+// @version      0.52
 // @description  try to take over the world!
 // @author       popyoung
 // @match        https://web.shanbay.com/wordsweb/
@@ -23,40 +23,40 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
     if (!existingStyle) {
         var style = document.createElement('style');
         style.setAttribute('data-rule', 'hideTips');
-        style.innerHTML = '.BayTrans_paraphrase__2JMIz { color: white !important;; }';
-        style.innerHTML += '.index_left__2LkyW > p:nth-child(2) { color: white !important; }';
-        style.innerHTML += 'div.index_exemplarySentenceDetail__2Cq1p:nth-child(1) > div:nth-child(1) > div:nth-child(1) { color: white !important;; }';
-        style.innerHTML += 'div.index_name__1gkfJ { color: white !important;; }';
-        style.innerHTML += 'div.index_sentenceCn__XJD1u { color: white !important;; }';
-        style.innerHTML += '.Nav_nav__3kyeO .Nav_container__sBZA1 .Nav_itemsWrapper__3FUxo {display:none;}'
-        style.innerHTML += '.Nav_nav__3kyeO .Nav_container__sBZA1,.SubNav_subnav__1HR8R .SubNav_container__1zXeP,.Layout_page__2Wedt .Layout_main__2_zw8 {width:auto;margin-left: 10px;margin-right: 10px;}'
+        style.innerHTML = '[class^=BayTrans_paraphrase] { color: white !important;; }';
+        style.innerHTML += '[class^=BayTrans_example] p:nth-child(2) { color: white !important; }';
+        style.innerHTML += 'div[class^=index_exemplarySentenceDetail]:nth-child(1) > div:nth-child(1) > div:nth-child(1) { color: white !important;; }';
+        //style.innerHTML += 'div.index_name__1gkfJ { color: white !important;; }';
+        style.innerHTML += 'div[class^=index_sentenceCn] { color: white !important;; }';
+        //style.innerHTML += '.Nav_nav__3kyeO .Nav_container__sBZA1 .Nav_itemsWrapper__3FUxo {display:none;}'
+        //style.innerHTML += '.Nav_nav__3kyeO .Nav_container__sBZA1,.SubNav_subnav__1HR8R .SubNav_container__1zXeP,.Layout_page__2Wedt .Layout_main__2_zw8 {width:auto;margin-left: 10px;margin-right: 10px;}'
         style.innerHTML += '.searchContainer {width:167px;}'
         style.innerHTML += '.searchContainer .input {width:132px;}'
-        style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k .index_right__3luD3 {margin-left: 24px;}'
-        style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k {font-size:18px;}'
-        style.innerHTML += '.index_container__LuiIf .index_left__2LkyW {font-size:18px;}'
-        style.innerHTML += '.index_trash__2coNz {display:none;}'
-        style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k .index_left__3SFmQ>p {margin-bottom:15px;display: flex;}'
-        style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k .index_left__3SFmQ>p::before {content: "\\021D2\\020";color: #1171b2;padding-right: 8px;margin-left:-30px;}'
+        //style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k .index_right__3luD3 {margin-left: 24px;}'
+        //style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k {font-size:18px;}'
+        //style.innerHTML += '.index_container__LuiIf .index_left__2LkyW {font-size:18px;}'
+        //style.innerHTML += '.index_trash__2coNz {display:none;}'
+        //style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k .index_left__3SFmQ>p {margin-bottom:15px;display: flex;}'
+        //style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k .index_left__3SFmQ>p::before {content: "\\021D2\\020";color: #1171b2;padding-right: 8px;margin-left:-30px;}'
         style.innerHTML += '.block-center {margin-left: inherit;}'
         style.innerHTML += '.span9 {width: 740px;}'
-        style.innerHTML += '.StudyPage_studyPage__1Ri5C {max-width: 1200px;}'
-        style.innerHTML += '.index_wrap__2PaUx {display: none;}'
-        style.innerHTML += '.Footer_footerWrap__L4iuD {display: none;}'
-        style.innerHTML += '.Layout_page__2Wedt {padding-bottom: 50px;}'
-        style.innerHTML += '.index_status__15KG5 {width: 1000px;}'
-        style.innerHTML += '.index_status__15KG5 .index_vocabularyLink__1c7FY {right: 80px;}'
+        style.innerHTML += '[class^=StudyPage_studyPage] {max-width: 1200px;}'
+        style.innerHTML += '[class^=index_exemplarySentenceDetail] {display: none;}'
+        style.innerHTML += '[class^=Footer_footerWrap] {display: none;}'
+        style.innerHTML += '[class^=Layout_page] {padding-bottom: 50px;}'
+        style.innerHTML += '[class^=index_status] {width: 1000px;}'
+        style.innerHTML += '[class^=index_status] [class^=index_vocabularyLink] {right: 80px;}'
         style.innerHTML += 'textarea {height: 270px !important;font-size:18px !important;}'
-        style.innerHTML += '.index_createNote__1IzQf  {width:unset;}'
+        style.innerHTML += '[class^=index_createNote]  {width:unset;}'
         //style.innerHTML += 'body {line-height: 2.2;}'
         document.head.appendChild(style);
 
         var style2 = document.createElement('style');
-        style2.textContent = '.StudyPage_studyPage__1Ri5C .StudyPage_nextBtn__1ygGn {right: 16px;} .block-center {margin-right: auto; margin-left: inherit;}';
+        style2.textContent = '[class^=StudyPage_studyPage] [class^=StudyPage_nextBtn] {right: 16px;} .block-center {margin-right: auto; margin-left: inherit;}';
         document.head.appendChild(style2);
         if (window.screen.height < 600) {
             var style3 = document.createElement('style');
-            style3.textContent = '.StudyPage_studyPage__1Ri5C .StudyPage_nextBtn__1ygGn {top: 30%}';
+            style3.textContent = '[class^=StudyPage_studyPage] [class^=StudyPage_nextBtn] {top: 30%}';
             document.head.appendChild(style3);
         }
 
@@ -68,11 +68,11 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
             click: function () {
                 if (btnOnRight == 1) {
                     btnOnRight = 0;
-                    style2.textContent = '.StudyPage_studyPage__1Ri5C .StudyPage_nextBtn__1ygGn {left: 12px;} .block-center {margin-right: inherit; margin-left: auto;}'
+                    style2.textContent = '[class^=StudyPage_studyPage] [class^=StudyPage_nextBtn] {left: 12px;} .block-center {margin-right: inherit; margin-left: auto;}'
                 }
                 else {
                     btnOnRight = 1;
-                    style2.textContent = '.StudyPage_studyPage__1Ri5C .StudyPage_nextBtn__1ygGn {right: 16px;} .block-center {margin-right: auto; margin-left: inherit;}';
+                    style2.textContent = '[class^=StudyPage_studyPage] [class^=StudyPage_nextBtn] {right: 16px;} .block-center {margin-right: auto; margin-left: inherit;}';
                 }
             },
             css: {
@@ -88,7 +88,7 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
         });
 
         // 将按钮添加到元素容器中
-        $('.SubNav_container__1zXeP').append(button);
+        $('[class^=SubNav_container]').append(button);
 
         function simulateKeyPress(key) {
             // 创建一个 KeyboardEvent 对象
@@ -103,7 +103,7 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
         $(document).on('keydown', function (event) {
             if (event.key === '1') {
                 // 模拟键盘输入d
-                var btn = $('.StudyPage_nextBtn__1ygGn');
+                var btn = $('[class^=StudyPage_nextBtn]');
                 if (btn.length > 0) {
                     setTimeout(function () { simulateKeyPress('d') }, 100);
                 }
@@ -144,7 +144,7 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
         }
         $(document).bind('keydown', function (event) {
             if (event.keyCode == 69) {
-                $('.index_wrap__2PaUx').toggle();
+                $('[class^=index_exemplarySentenceDetail]').toggle();
                 //playReminder();
             }
         });
@@ -155,7 +155,7 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
         var count = 0;
         var autoScroll = 1;
         setInterval(function () {
-            var vocabPron = $('.VocabPronounce_vcoabPronounce__2D0UH');
+            var vocabPron = $('[class^=VocabPronounce_vcoabPronounce]');
             if (vocabPron.length > 0) {
                 if (vocabPron.children().length === 3) {
                     var newElement = $('<div id="timer">00:00</div>');
@@ -186,7 +186,7 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
             if (button.length > 0) {
                 if (button.css("cursor") == "auto") {
                     button.on("click", function () {
-                        $('.index_wrap__2PaUx').toggle();
+                        $('[class^=index_exemplarySentenceDetail]').toggle();
                     });
                     //使用jQuery的bind方法，给document绑定keypress事件
 
@@ -227,7 +227,7 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
             for (let i = 0; i < lines.length; i++) {
                 if (lines[i] != "") {
                     reminderText += '<p>' + lines[i] + '</p>';
-                    newTextContent += '<p>' + lines[i].replace(/(?<=[=≈].*?)[A-z -]+/g, ' ?'); + '</p>';
+                    newTextContent += '<p>' + lines[i].replace(/(?<=[=≈].*?)[ A-z-]+/g, ' ?'); + '</p>';
                 }
             }
 
@@ -238,14 +238,14 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
     }
 
     function lookup() {
-        $('.BayTrans_paraphrase__2JMIz').css('background-color', 'black');
-        $('.index_left__2LkyW > p:nth-child(2)').css('background-color', 'black');
-        $('div.index_exemplarySentenceDetail__2Cq1p:nth-child(1) > div:nth-child(1) > div:nth-child(1)').css('background-color', 'black');
-        $('div.index_name__1gkfJ').css('background-color', 'black');
-        $('div.index_sentenceCn__XJD1u').css('background-color', 'black');
-        $('.index_left__3SFmQ').html(reminderText);
+        $('[class^=BayTrans_paraphrase]').css('background-color', 'black');
+        $('[class^=BayTrans_example] p:nth-child(2)').css('background-color', 'black');
+        $('div[class^=index_exemplarySentenceDetail]:nth-child(1) > div:nth-child(1) > div:nth-child(1)').css('background-color', 'black');
+        //$('div.index_name__1gkfJ').css('background-color', 'black');
+        $('div[class^=index_sentenceCn]').css('background-color', 'black');
+        $('[class^=index_left]').html(reminderText);
         if (window.screen.height >= 600) {
-            var newTab = window.open('gdlookup://localhost/' + $('div.VocabPronounce_word__17Tma').text(), "_blank");
+            var newTab = window.open('gdlookup://localhost/' + $('div[class^=VocabPronounce_word]').text(), "_blank");
             newTab.close();
         }
     }
@@ -263,7 +263,7 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
         // 开始计时器，模拟长按事件
         timer = setTimeout(function () {
             lookup();
-        }, 2000); // 1000毫秒（1秒）为长按时间
+        }, 1000); // 1000毫秒（1秒）为长按时间
     });
 
     $(document).on('touchend', function () {
