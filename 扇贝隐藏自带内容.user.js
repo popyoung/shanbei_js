@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         扇贝隐藏自带内容
 // @namespace    http://tampermonkey.net/
-// @version      0.60
+// @version      0.61
 // @description  try to take over the world!
 // @author       popyoung
 // @match        https://web.shanbay.com/wordsweb/
@@ -25,19 +25,19 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
         style.setAttribute('data-rule', 'hideTips');
         style.innerHTML = '[class^=BayTrans_paraphrase] { color: white !important;; }';
         style.innerHTML += '[class^=BayTrans_example] p:nth-child(2) { color: white !important; }';
-        style.innerHTML += 'div[class^=index_exemplarySentenceDetail]:nth-child(1) > div:nth-child(1) > div:nth-child(1) { color: white !important;; }';
-        //style.innerHTML += 'div.index_name__1gkfJ { color: white !important;; }';
+        //style.innerHTML += 'div[class^=index_exemplarySentenceDetail]:nth-child(1) > div:nth-child(1) > div:nth-child(1) { color: white !important;; }';
+        style.innerHTML += 'div[class^=index_name] { color: white !important;; }';
         style.innerHTML += 'div[class^=index_sentenceCn] { color: white !important;; }';
-        //style.innerHTML += '.Nav_nav__3kyeO .Nav_container__sBZA1 .Nav_itemsWrapper__3FUxo {display:none;}'
-        //style.innerHTML += '.Nav_nav__3kyeO .Nav_container__sBZA1,.SubNav_subnav__1HR8R .SubNav_container__1zXeP,.Layout_page__2Wedt .Layout_main__2_zw8 {width:auto;margin-left: 10px;margin-right: 10px;}'
+        style.innerHTML += '[class^=Nav_nav] [class^=Nav_container] [class^=Nav_itemsWrapper] {display:none;}'
+        style.innerHTML += '[class^=Nav_nav] [class^=Nav_container],[class^=SubNav_subnav] [class^=SubNav_container],[class^=Layout_page] [class^=Layout_main] {width:auto;margin-left: 10px;margin-right: 10px;}'
         style.innerHTML += '.searchContainer {width:167px;}'
         style.innerHTML += '.searchContainer .input {width:132px;}'
-        //style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k .index_right__3luD3 {margin-left: 24px;}'
-        //style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k {font-size:18px;}'
-        //style.innerHTML += '.index_container__LuiIf .index_left__2LkyW {font-size:18px;}'
-        //style.innerHTML += '.index_trash__2coNz {display:none;}'
-        //style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k .index_left__3SFmQ>p {margin-bottom:15px;display: flex;}'
-        //style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k .index_left__3SFmQ>p::before {content: "\\021D2\\020";color: #1171b2;padding-right: 8px;margin-left:-30px;}'
+        style.innerHTML += '[class^=index_myNotesWrap] [class^=index_noteDetail] [class^=index_noteDetailContainer] [class^=index_noteDetailInner] [class^=index_right] {margin-left: 24px;}'
+        style.innerHTML += '[class^=index_myNotesWrap] [class^=index_noteDetail] [class^=index_noteDetailContainer] [class^=index_noteDetailInner] {font-size:18px;}'
+        style.innerHTML += '[class^=index_container] [class^=index_left] {font-size:18px;}'
+        style.innerHTML += '[class^=index_trash] {display:none;}'
+        style.innerHTML += '[class^=index_myNotesWrap] [class^=index_noteDetail] [class^=index_noteDetailContainer] [class^=index_noteDetailInner] [class^=index_left]>p {margin-bottom:15px;display: flex;}'
+        style.innerHTML += '[class^=index_myNotesWrap] [class^=index_noteDetail] [class^=index_noteDetailContainer] [class^=index_noteDetailInner] [class^=index_left]>p::before {content: "\\021D2\\020";color: #1171b2;padding-right: 8px;margin-left:-30px;}'
         style.innerHTML += '.block-center {margin-left: inherit;}'
         style.innerHTML += '[class^=index_option] {width: -moz-available;}'
         style.innerHTML += '[class^=StudyPage_studyPage] {max-width: 2400px; padding: 10px;}'
@@ -208,7 +208,7 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
                     });
                 }
             }
-            var myDiv = $('.index_left__3SFmQ');
+            var myDiv = $('[class^=index_myNotesWrap] [class^=index_noteDetail] [class^=index_noteDetailContainer] [class^=index_noteDetailInner] [class^=index_left]');
             // 获取 div 内的文本内容
 
             var textContent = myDiv.text();
