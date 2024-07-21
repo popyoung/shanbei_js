@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         扇贝隐藏自带内容
 // @namespace    http://tampermonkey.net/
-// @version      0.52
+// @version      0.6
 // @description  try to take over the world!
 // @author       popyoung
 // @match        https://web.shanbay.com/wordsweb/
@@ -39,8 +39,8 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
         //style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k .index_left__3SFmQ>p {margin-bottom:15px;display: flex;}'
         //style.innerHTML += '.index_myNotesWrap__OhD8w .index_noteDetail__3QLjB .index_noteDetailContainer__Je-Iu .index_noteDetailInner__2Jl9k .index_left__3SFmQ>p::before {content: "\\021D2\\020";color: #1171b2;padding-right: 8px;margin-left:-30px;}'
         style.innerHTML += '.block-center {margin-left: inherit;}'
-        style.innerHTML += '.span9 {width: 740px;}'
-        style.innerHTML += '[class^=StudyPage_studyPage] {max-width: 1200px;}'
+        style.innerHTML += '[class^=index_option] {width: -moz-available;}'
+        style.innerHTML += '[class^=StudyPage_studyPage] {max-width: 2400px; padding: 10px;}'
         style.innerHTML += '[class^=index_exemplarySentenceDetail] {display: none;}'
         style.innerHTML += '[class^=Footer_footerWrap] {display: none;}'
         style.innerHTML += '[class^=Layout_page] {padding-bottom: 50px;}'
@@ -48,18 +48,26 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
         style.innerHTML += '[class^=index_status] [class^=index_vocabularyLink] {right: 80px;}'
         style.innerHTML += 'textarea {height: 270px !important;font-size:18px !important;}'
         style.innerHTML += '[class^=index_createNote]  {width:unset;}'
+        style.innerHTML += '[class^=index_progress] {max-width:1000px;}'
+        style.innerHTML += '[class^=StudySummary_studySummary] table {max-width:1000px;}'
         //style.innerHTML += 'body {line-height: 2.2;}'
         document.head.appendChild(style);
 
         var style2 = document.createElement('style');
         style2.textContent = '[class^=StudyPage_studyPage] [class^=StudyPage_nextBtn] {right: 16px;} .block-center {margin-right: auto; margin-left: inherit;}';
         document.head.appendChild(style2);
-        if (window.screen.height < 600) {
-            var style3 = document.createElement('style');
+        var style3 = document.createElement('style');
+        function refreshWindowFrame() {
+            if (window.screen.height < 600) {
             style3.textContent = '[class^=StudyPage_studyPage] [class^=StudyPage_nextBtn] {top: 30%}';
-            document.head.appendChild(style3);
+            }
+            style3.textContent += '.span9 {width: ' + (window.innerWidth - 220) + 'px;}'
+            style3.textContent += '.span12 {width: ' + (window.innerWidth - 150) + 'px;}'
+            style3.textContent += '[class^=index_progress] {width: ' + (window.innerWidth - 90) + 'px;}'
+            style3.textContent += '[class^=StudySummary_studySummary] table {width: ' + (window.innerWidth - 90) + 'px;}'
         }
-
+        refreshWindowFrame();
+        document.head.appendChild(style3);
         var btnOnRight = 1;
         // 创建按钮元素并添加样式和事件
         var button = $('<button>', {
@@ -155,6 +163,7 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
         var count = 0;
         var autoScroll = 1;
         setInterval(function () {
+            refreshWindowFrame();
             var vocabPron = $('[class^=VocabPronounce_vcoabPronounce]');
             if (vocabPron.length > 0) {
                 if (vocabPron.children().length === 3) {
@@ -227,7 +236,7 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
             for (let i = 0; i < lines.length; i++) {
                 if (lines[i] != "") {
                     reminderText += '<p>' + lines[i] + '</p>';
-                    newTextContent += '<p>' + lines[i].replace(/(?<=[=≈].*?)[ A-z-]+/g, ' ?'); + '</p>';
+                    newTextContent += '<p>' + lines[i].replace(/(?<=[=≈].*?)\b(?:(?!or))\b[a-z]+/g, ' ?'); + '</p>';
                 }
             }
 
@@ -263,7 +272,7 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
         // 开始计时器，模拟长按事件
         timer = setTimeout(function () {
             lookup();
-        }, 1000); // 1000毫秒（1秒）为长按时间
+        }, 2000); // 1000毫秒（1秒）为长按时间
     });
 
     $(document).on('touchend', function () {
