@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         扇贝隐藏自带内容
 // @namespace    http://tampermonkey.net/
-// @version      0.61
+// @version      0.62
 // @description  try to take over the world!
 // @author       popyoung
 // @match        https://web.shanbay.com/wordsweb/
@@ -252,7 +252,7 @@ function shuffleArrayStartingFromIndex(array, startIndexToSkip) {
         $('div[class^=index_exemplarySentenceDetail]:nth-child(1) > div:nth-child(1) > div:nth-child(1)').css('background-color', 'black');
         //$('div.index_name__1gkfJ').css('background-color', 'black');
         $('div[class^=index_sentenceCn]').css('background-color', 'black');
-        $('[class^=index_left]').html(reminderText);
+        $('[class^=index_myNotesWrap] [class^=index_noteDetail] [class^=index_noteDetailContainer] [class^=index_noteDetailInner] [class^=index_left]').html(reminderText);
         if (window.screen.height >= 600) {
             var newTab = window.open('gdlookup://localhost/' + $('div[class^=VocabPronounce_word]').text(), "_blank");
             newTab.close();
